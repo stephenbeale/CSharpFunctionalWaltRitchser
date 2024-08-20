@@ -8,6 +8,8 @@ namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
     {
+        //Global variable = mutatable across functions, so a problem
+        private int _counter = 0;
         public decimal CalcDiscount(decimal amount, decimal discountRate)
         {
             //Functional because return is based entirely on input parameters.
@@ -30,5 +32,16 @@ namespace CSharpFunctionalWaltRitchser
                     minuteSpan);
             }
         }
+
+        public void UpdateByTwo()
+        {
+            _counter += 2;
+        }
+        public void UpdateByFive()
+        {
+            _counter += 5;
+        }
+
+
     }
 }
