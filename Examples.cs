@@ -14,11 +14,9 @@ namespace CSharpFunctionalWaltRitchser
     {
        public void DoWork()
         {
-            //Instantiate immutable colour class 
+            //Builder
 
-            //Can't do as he's done with Immutable.Colour - this is not possible anymore
-            //var myColour1 = new Colour(red: 127, green: 23, blue: 255);
-
+            Colour colour1 = new Colour.Builder().Create();
 
         }
     }
