@@ -8,6 +8,9 @@ namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
     {
+        //Global variable = mutatable across functions, so a problem 
+
+        private int _counter = 0;
         public decimal CalcDiscount(decimal amount, decimal discountRate)
         {
             //Functional because return is based entirely on input parameters.
@@ -30,5 +33,42 @@ namespace CSharpFunctionalWaltRitchser
                     minuteSpan);
             }
         }
+
+        public void UpdateByTwo()
+        {
+            _counter += 2;
+        }
+        public void UpdateByFive()
+        {
+            _counter += 5;
+        }
+
+        #region List as shared state
+        private void WorkWithList() { 
+            var countA = _numbers.Count;
+            AddNumbersToList();
+            var countB = _numbers.Count;
+        }
+
+        private List<int> _numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+
+        //Not changing list BUT it is changing content of list which is a side effect, hence impure.
+        public void AddNumbersToList()
+        {
+            _numbers.Add(2);
+            _numbers.Add(4);
+        }
+
+        //Pure function - not doing anything with state, doing everything locally, so no side effects.
+        public int TotalTheNumbers()
+        {
+            int total = 0;
+            foreach (int number in _numbers)
+            {
+                total += number;
+            }
+            return total;
+        }
+        #endregion
     }
 }
