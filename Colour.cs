@@ -18,5 +18,20 @@ namespace CSharpFunctionalWaltRitchser
         public byte Purple { 
             get { return _purple; }
         }
+
+        /*
+         * From C# 6 on, you can create read-only automatically-implemented properties:
+         * this property can only be assigned in a constructor
+         */
+        public byte Red { get; }
+        public byte Green { get; }
+        public byte Blue { get; }
+
+        public Colour(byte red, byte green, byte blue)
+        {
+            Red = red;
+            Green = green;
+            Blue = blue;
+        }
     }
 }
