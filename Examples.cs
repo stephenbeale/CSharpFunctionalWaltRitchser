@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace CSharpFunctionalWaltRitchser
 
         //Not changing list BUT it is changing content of list which is a side effect, hence impure.
 
-        public void AddNumbersToList(List<int> inputList)
+        public void AddNumbersToList(ImmutableList<int> inputList)
         {
             //Still a side effect as changes contents of the list
             inputList.Add(2);
@@ -63,7 +64,7 @@ namespace CSharpFunctionalWaltRitchser
 
         //Pure function - not doing anything with state, doing everything locally, so no side effects.
         //Still pure with list as input - 
-        public int TotalTheNumbers(List<int> inputList)
+        public int TotalTheNumbers(ImmutableList<int> inputList)
         {
             int total = 0;
             foreach (int number in inputList)
@@ -75,6 +76,15 @@ namespace CSharpFunctionalWaltRitchser
         #endregion       
 
         #region 2. Don't mutate input arguments 
+        public void DoWork()
+        {
+            ImmutableList<int> numbersList;
+            numbersList = ImmutableList<int>.Empty;
+            numbersList = ImmutableList.Create<int>(1,3,5,7);
+            AddNumbersToList(numbersList);
+            var total = TotalTheNumbers(numbersList);
+            Console.WriteLine(total);
+        }
 
         //This is a pure function
         public void WorkingWithCounter()
