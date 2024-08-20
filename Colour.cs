@@ -43,5 +43,13 @@ namespace CSharpFunctionalWaltRitchser
 
         public bool IsWhite { get; }
 
+        public Colour Lighten(byte lightenBy)
+        {
+            var redValue = (byte)Math.Clamp(value: Red + lightenBy, min: Red, max: Byte.MaxValue);
+            var greenValue = (byte)Math.Clamp(value: + lightenBy, min: Green, max: Byte.MaxValue);
+            var blueValue = (byte)Math.Clamp(value: + lightenBy, min: Blue, max: Byte.MaxValue);
+
+            return new Colour(redValue, greenValue, blueValue);
+        }
     }
 }

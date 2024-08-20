@@ -18,6 +18,8 @@ namespace CSharpFunctionalWaltRitchser
 
             //Can't do as he's done with Immutable.Colour - this is not possible anymore
             var myColour1 = new Colour(red: 127, green: 23, blue: 255);
+
+
         }
     }
 }
