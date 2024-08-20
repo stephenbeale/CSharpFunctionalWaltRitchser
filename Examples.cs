@@ -76,8 +76,11 @@ namespace CSharpFunctionalWaltRitchser
         #endregion       
 
         #region 2. Don't mutate input arguments 
+
         public void DoWork()
         {
+            //Using immutable list type that help with this.
+            //Immutable types are thread-safe
             ImmutableList<int> numbersList;
             numbersList = ImmutableList<int>.Empty;
             numbersList = ImmutableList.Create<int>(1,3,5,7);
