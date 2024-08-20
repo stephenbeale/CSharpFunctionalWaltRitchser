@@ -14,9 +14,9 @@ namespace CSharpFunctionalWaltRitchser
             return amount * (1 - discountRate);
         }
 
-        public DateTime GetCurrentTimeRoundedUpToCustomMinuteInterval(int interval)
+        public DateTime GetCurrentTimeRoundedUpToCustomMinuteInterval(int interval, DateTime startTime)
         {
-            var currentTime = DateTime.Now;
+            var currentTime = startTime;
             var minuteSpan = TimeSpan.FromMinutes(interval).Ticks;
 
             if (currentTime.Ticks % minuteSpan == 0)
