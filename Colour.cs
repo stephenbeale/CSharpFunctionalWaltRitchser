@@ -6,19 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSharpFunctionalWaltRitchser
 {
+    //Simulate an RGB colour class
     public sealed class Colour
     {
-        //Obsolete - don't use this
-        public byte Orange { get; private set; }
-
-        //Better but more verbose
-        //Backing field which must be set in the constructor as there is no setter
-        private readonly byte _purple { get; set; }
-
-        public byte Purple { 
-            get { return _purple; }
-        }
-
         /*
          * From C# 6 on, you can create read-only automatically-implemented properties:
          * this property can only be assigned in a constructor
@@ -26,6 +16,7 @@ namespace CSharpFunctionalWaltRitchser
         public byte Red { get; }
         public byte Green { get; }
         public byte Blue { get; }
+        
 
         //This is in lieu of setters
         public Colour(byte red, byte green, byte blue)
@@ -33,13 +24,24 @@ namespace CSharpFunctionalWaltRitchser
             Red = red;
             Green = green;
             Blue = blue;
+            IsWhite = (Red == 255 && Green == 255 && Blue == 255);
         }
 
-        public Colour(byte red)
+        //ToString as a pure function
+        public override string ToString()
         {
-            Red = red;
-            Green = 0;
-            Blue = 0;
+            return $"Red: {Red}, Green: {Green}, Blue: {Blue}";
         }
+
+        public bool IsBlack()
+        {
+            //instance methods must be pure
+            return (Red == 0 && Green == 0 && Blue == 0);
+        }
+
+        //OR Implement as a property - but must decide where to put the expression (in constructor OR here in getter)
+
+        public bool IsWhite { get; }
+
     }
 }
