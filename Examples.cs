@@ -46,29 +46,53 @@ namespace CSharpFunctionalWaltRitchser
         #region List as shared state
         private void WorkWithList() { 
             var countA = _numbers.Count;
-            AddNumbersToList();
+            //AddNumbersToList();
             var countB = _numbers.Count;
         }
 
         private List<int> _numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
 
         //Not changing list BUT it is changing content of list which is a side effect, hence impure.
-        public void AddNumbersToList()
+
+        public void AddNumbersToList(List<int> inputList)
         {
-            _numbers.Add(2);
-            _numbers.Add(4);
+            //Still a side effect as changes contents of the list
+            inputList.Add(2);
+            inputList.Add(4);
         }
 
         //Pure function - not doing anything with state, doing everything locally, so no side effects.
-        public int TotalTheNumbers()
+        //Still pure with list as input - 
+        public int TotalTheNumbers(List<int> inputList)
         {
             int total = 0;
-            foreach (int number in _numbers)
+            foreach (int number in inputList)
             {
                 total += number;
             }
             return total;
         }
+        #endregion       
+
+        #region 2. Don't mutate input arguments 
+
+        //This is a pure function
+        public void WorkingWithCounter()
+        {
+            int startNumber = 10;
+            int newNumber = IncrementByTwo(startNumber);
+            newNumber = IncrementByFive(newNumber);
+        }
+        public int IncrementByFive(int originalNumber)
+        {
+            return originalNumber + 5;
+        }
+
+        public int IncrementByTwo(int originalNumber)
+        {
+            return originalNumber + 2;
+        }
+
         #endregion
     }
 }
