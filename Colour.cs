@@ -34,5 +34,12 @@ namespace CSharpFunctionalWaltRitchser
             Green = green;
             Blue = blue;
         }
+
+        public Colour(byte red)
+        {
+            Red = red;
+            Green = 0;
+            Blue = 0;
+        }
     }
 }
