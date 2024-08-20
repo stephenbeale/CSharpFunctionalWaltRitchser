@@ -27,6 +27,7 @@ namespace CSharpFunctionalWaltRitchser
         public byte Green { get; }
         public byte Blue { get; }
 
+        //This is in lieu of setters
         public Colour(byte red, byte green, byte blue)
         {
             Red = red;
