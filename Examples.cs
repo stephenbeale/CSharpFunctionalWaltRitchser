@@ -14,6 +14,7 @@ namespace CSharpFunctionalWaltRitchser
             return amount * (1 - discountRate);
         }
 
+        //Adding startTime parameter here makes this pure
         public DateTime GetCurrentTimeRoundedUpToCustomMinuteInterval(int interval, DateTime startTime)
         {
             var currentTime = startTime;
