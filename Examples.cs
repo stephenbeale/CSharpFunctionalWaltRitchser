@@ -9,17 +9,22 @@ namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
     {
-        //Global variable = mutatable across functions, so a problem 
-        private int _counter = 0;
-      
-        private List<int> _numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
-
-        //Now pure  - debug looking at list that goes in and list that comes out.
-
-        public ImmutableList<int> AddNumbersToList(ImmutableList<int> inputList)
+       public void DoWork()
         {
-            //Now returns a new list with 5 items, so no side effect
-            return inputList.Add(2);            
+            //Immutable types internal state is not changeable after creation
+            DateTime dt1, dt2;
+
+            //Set some properties in the constructor
+            dt1 = new DateTime(year: 2025, month: 10, day: 26);
+
+            //All properties are read-only after initialisation
+            //or think of them as 'write-once'
+
+            int day = dt1.Day; //we can read this value
+            //dt1.Day = 27; // we cannot change this via property as it is read-only
+
+            //But what about when we do need to change the instance?
+            //For example, add 3 days to the existing date.
         }
     }
 }
