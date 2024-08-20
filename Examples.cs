@@ -12,28 +12,28 @@ namespace CSharpFunctionalWaltRitchser
         //Global variable = mutatable across functions, so a problem 
 
         private int _counter = 0;
-        public decimal CalcDiscount(decimal amount, decimal discountRate)
-        {
-            //Functional because return is based entirely on input parameters.
-            return amount * (1 - discountRate);
-        }
+        //public decimal CalcDiscount(decimal amount, decimal discountRate)
+        //{
+        //    //Functional because return is based entirely on input parameters.
+        //    return amount * (1 - discountRate);
+        //}
 
-        //Adding startTime parameter here makes this pure
-        public DateTime GetCurrentTimeRoundedUpToCustomMinuteInterval(int interval, DateTime startTime)
-        {
-            var currentTime = startTime;
-            var minuteSpan = TimeSpan.FromMinutes(interval).Ticks;
+        ////Adding startTime parameter here makes this pure
+        //public DateTime GetCurrentTimeRoundedUpToCustomMinuteInterval(int interval, DateTime startTime)
+        //{
+        //    var currentTime = startTime;
+        //    var minuteSpan = TimeSpan.FromMinutes(interval).Ticks;
 
-            if (currentTime.Ticks % minuteSpan == 0)
-            {
-                return currentTime;
-            }
-            else
-            {
-                return new DateTime((currentTime.Ticks / minuteSpan + 1) *
-                    minuteSpan);
-            }
-        }
+        //    if (currentTime.Ticks % minuteSpan == 0)
+        //    {
+        //        return currentTime;
+        //    }
+        //    else
+        //    {
+        //        return new DateTime((currentTime.Ticks / minuteSpan + 1) *
+        //            minuteSpan);
+        //    }
+        //}
 
         public void UpdateByTwo()
         {
@@ -53,13 +53,12 @@ namespace CSharpFunctionalWaltRitchser
 
         private List<int> _numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7 };
 
-        //Not changing list BUT it is changing content of list which is a side effect, hence impure.
+        //Now pure  - debug looking at list that goes in and list that comes out.
 
-        public void AddNumbersToList(ImmutableList<int> inputList)
+        public ImmutableList<int> AddNumbersToList(ImmutableList<int> inputList)
         {
-            //Still a side effect as changes contents of the list
-            inputList.Add(2);
-            inputList.Add(4);
+            //Now returns a new list with 5 items, so no side effect
+            return inputList.Add(2);            
         }
 
         //Pure function - not doing anything with state, doing everything locally, so no side effects.
@@ -105,7 +104,6 @@ namespace CSharpFunctionalWaltRitchser
         {
             return originalNumber + 2;
         }
-
         #endregion
     }
 }
