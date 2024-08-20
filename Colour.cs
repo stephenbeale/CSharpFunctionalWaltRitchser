@@ -45,11 +45,25 @@ namespace CSharpFunctionalWaltRitchser
 
         public Colour Lighten(byte lightenBy)
         {
+            //+ so it can only become lighter
+            //Min value must be what it comes in as, so it can't get lighter
             var redValue = (byte)Math.Clamp(value: Red + lightenBy, min: Red, max: Byte.MaxValue);
-            var greenValue = (byte)Math.Clamp(value: + lightenBy, min: Green, max: Byte.MaxValue);
-            var blueValue = (byte)Math.Clamp(value: + lightenBy, min: Blue, max: Byte.MaxValue);
+            var greenValue = (byte)Math.Clamp(value: Green + lightenBy, min: Green, max: Byte.MaxValue);
+            var blueValue = (byte)Math.Clamp(value: Blue + lightenBy, min: Blue, max: Byte.MaxValue);
 
             return new Colour(redValue, greenValue, blueValue);
         }
+
+        public Colour Darken(byte darkenBy)
+        {
+            //so it can only become lighter
+            //Max. value must be what it comes in as, so can't get lighter
+            var redValue = (byte)Math.Clamp(value: Red - darkenBy, min: Byte.MinValue, max: Red);
+            var greenValue = (byte)Math.Clamp(value: Green - darkenBy, min: Byte.MinValue, max: Green);
+            var blueValue = (byte)Math.Clamp(value: Blue - darkenBy, min: Byte.MinValue, max: Blue);
+
+            return new Colour(redValue, greenValue, blueValue);
+        }
+
     }
 }
