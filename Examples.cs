@@ -25,6 +25,7 @@ namespace CSharpFunctionalWaltRitchser
 
             //But what about when we do need to change the instance?
             //For example, add 3 days to the existing date.
+            dt2 = new DateTime(year: dt1.Year, month: dt1.Month, day: dt1.Day + 3);
         }
     }
 }
