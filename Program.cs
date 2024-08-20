@@ -12,6 +12,8 @@ class Program
     {
         var examples = new Examples();
         Console.Clear();
+
+        //Makes this function impure since time is always different
         Console.WriteLine(DateTime.Now);
         var result =
             examples.GetCurrentTimeRoundedUpToCustomMinuteInterval(4);
