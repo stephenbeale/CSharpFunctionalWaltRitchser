@@ -32,6 +32,18 @@ namespace CSharpFunctionalWaltRitchser
             //If your function is short, and doesn't need to be reused
             // a Lambda expression is useful
             Func<int, int> functionVar = x => (x * 10);
+
+            int result = functionVar(6);
+
+            Func<int, int, bool> predicateVar = IsMultipleOf;
+
+            bool isMultipleOfFive = predicateVar(25, 5);
+            bool isMultipleOfSeven = predicateVar(25, 7);
+        }
+
+        public bool IsMultipleOf(int candidate, int multiplier)
+        {
+            return (candidate % multiplier) == 0;
         }
     }
 }
