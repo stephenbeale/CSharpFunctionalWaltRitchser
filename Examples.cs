@@ -12,20 +12,14 @@ namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
     {
+        //I/O is a side effect
+        //Create separate functions for all I/O work
+
+        //example: OpenFile, UpdateFile
+        //Use pure function to perform computations on the file contents.
+        private const string RobotFileName = "RobotNames.xml";
        public void DoWork()
         {
-            //Builder
-            //Builder is a sub-class of Colour, hence same colour and chaining this way
-            //returning 'this' on the various setter methods also allows the chaining here.
-            Colour colour1 = new Colour.Builder().Create(); //default
-            Colour colour2 = new Colour.Builder().Red(127).Create(); //red only
-            Colour colour3 = new Colour.Builder().Green(45).Alpha(255).Create(); // green and alpha
-
-            var greenValue = colour3.Green;
-
-            //colour2.Red = 0;
-
-            Colour lightenedColour = colour3.Lighten(22);
 
         }
     }
