@@ -23,9 +23,8 @@ namespace CSharpFunctionalWaltRitchser
         private const string StudentFileName = "Students.xml";
        public void DoWork()
         {
-            var rootNames = GetRobots();
-            Student student = new Student(id: 1, name: "me", age: 23, enrollmentDate: new DateOnly(day: 01, month:01, year:2020), gpa: 2.3, isFullTime: true, courses: new List<string> { "Maths", "Computer Science" });
-
+            var robots = GetRobots();           
+            int total = GetTotalWeight(robots);
         }
 
         public ImmutableList<Student> GetStudentsForSteve()
@@ -84,6 +83,21 @@ namespace CSharpFunctionalWaltRitchser
             {
                 throw;
             }
+        }
+
+        public int GetTotalWeight(ImmutableList<Robot> robots)
+        {
+            int total = 0;
+            foreach (var robot in robots)
+            {
+                total += robot.Weight;
+            }
+            return total;
+        }
+
+        public string SaveToFile()
+        {
+            return null;
         }
     }
 }
