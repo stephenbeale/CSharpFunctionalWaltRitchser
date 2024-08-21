@@ -23,9 +23,10 @@ namespace CSharpFunctionalWaltRitchser
         private const string StudentFileName = "Students.xml";
        public void DoWork()
         {
-            var rootNames = GetRobots();
-            Student student = new Student(id: 1, name: "me", age: 23, enrollmentDate: new DateOnly(day: 01, month:01, year:2020), gpa: 2.3, isFullTime: true, courses: new List<string> { "Maths", "Computer Science" });
-
+            var robots = GetRobots();           
+            int total = GetTotalWeight(robots);
+            var blueRobots = ImmutableList.Create(robots.Where(x => x.TeamName == "Blue").ToArray());
+            int blueTeamTotal = GetTotalWeight(blueRobots);
         }
 
         public ImmutableList<Student> GetStudentsForSteve()
@@ -84,6 +85,22 @@ namespace CSharpFunctionalWaltRitchser
             {
                 throw;
             }
+        }
+
+        //Immutable list is better than generic as you could then change the type and get a different result.
+        public int GetTotalWeight(ImmutableList<Robot> robots)
+        {
+            int total = 0;
+            foreach (var robot in robots)
+            {
+                total += robot.Weight;
+            }
+            return total;
+        }
+
+        public string SaveToFile()
+        {
+            return null;
         }
     }
 }
