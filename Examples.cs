@@ -14,13 +14,21 @@ namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
     {
+
+        public void DoWork()
+        {
+            var currentProduct = new Product(productName: "Microphone", retailPrice: 200M);
+            var salePriceA = GetProductPrice(product: currentProduct, quantity: 12, isPremiumCustomer: true);
+        }
+        
+
         /*Expressions can be:
-         * - literal value
-         * - method invocation
-         * - operator and its operands
-         * - simple name e.g. name of variable, type member, method parameter, namespace or type.
-         * 
-         */
+* - literal value
+* - method invocation
+* - operator and its operands
+* - simple name e.g. name of variable, type member, method parameter, namespace or type.
+* 
+*/
 
         public void ExamplesOfExpressions()
         {
@@ -56,6 +64,23 @@ namespace CSharpFunctionalWaltRitchser
             string isBigString = isBig ? "Big Number" : "Small number";
 
 
+        }
+
+        private class Product
+        {
+            string productName;
+            decimal retailPrice;
+
+            public Product(string productName, decimal retailPrice)
+            {
+                this.productName = productName;
+                this.retailPrice = retailPrice;
+            }            
+        }
+
+        public decimal GetProductPrice(Product product, int quantity, bool isPremiumCustomer)
+        {
+            throw new NotImplementedException();
         }
     }
 }
