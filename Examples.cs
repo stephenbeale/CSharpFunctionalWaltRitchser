@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -36,6 +37,17 @@ namespace CSharpFunctionalWaltRitchser
             {
                 discountAmount += .05M;
             }
+            return product.RetailPrice * (1 - discountAmount);
+        }
+
+        #endregion
+
+        #region Expression version - my attempt
+
+        //Uses a double ternary in lieu of if statements
+        public decimal GetProductPriceExpression(Product product, int quantity, bool isPremiumCustomer)
+        {
+            decimal discountAmount = (quantity > 10 ? .15M : 0) + (isPremiumCustomer ? 0.05M : 0);
             return product.RetailPrice * (1 - discountAmount);
         }
 
