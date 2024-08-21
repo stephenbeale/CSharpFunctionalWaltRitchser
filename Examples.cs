@@ -35,20 +35,20 @@ namespace CSharpFunctionalWaltRitchser
                 var xmlDetails = XDocument.Load(StudentFileName);
                 //Root elementS should point to all in list, not first entry of sub-list
                 var students = xmlDetails.Root.Elements("Student").
-                    Select(x => new Student
-                    {
+                    Select(x => new Student(
                         //String name here must match XML exactly
-                        Id = (int)x.Element("ID"),
-                        Name = x.Element("Name").Value,
-                        Age = (int)x.Element("Age"),
-                        EnrollmentDate = (DateOnly.Parse(x.Element("EnrollmentDate").Value),
-                        GPA = double.Parse(x.Element("GPA").Value),
-                        IsFullTime = bool.Parse(x.Element("IsFullTime").Value),
-                        Courses = x.Element("Courses").
-                        Elements("Course")
-                        .Select(c => c.Value)
-                        .ToList()
-                    }).ToArray();
+                        id: (int)x.Element("ID"),
+                        name: x.Element("Name").Value,
+                        age: (int)x.Element("Age"),
+                        enrollmentDate: DateOnly.Parse(x.Element("EnrollmentDate").Value),
+                        gpa: double.Parse(x.Element("GPA").Value),
+                        isFullTime: bool.Parse(x.Element("IsFullTime").Value),
+                        courses: x.Element("Courses") != null ?
+                        x.Element("Courses")
+                            .Elements("Course")
+                            .Select(c => c.Value)
+                            .ToList() : new List<string>()
+                        )).ToArray();
 
                 return ImmutableList.Create(students);
             }

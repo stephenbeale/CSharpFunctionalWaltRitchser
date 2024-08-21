@@ -13,13 +13,9 @@ class Program
         var students = examples.GetStudentsForSteve();
         students.ForEach(student =>
         {
-            Console.WriteLine(student.Id);
-            Console.WriteLine(student.Name);
-            Console.WriteLine(student.Age);
-            Console.WriteLine(student.EnrollmentDate);
-            Console.WriteLine(student.GPA);
-            Console.WriteLine(student.IsFullTime);
-            Console.WriteLine(student.Courses);
-        });
+            Console.WriteLine($"{student.Id},{student.Name},{student.Age},{student.EnrollmentDate},{student.GPA},{student.IsFullTime}");
+            Console.WriteLine("Courses: " + string.Join(", ", student.Courses));
+            Console.WriteLine();
+        } );
     }
 }
