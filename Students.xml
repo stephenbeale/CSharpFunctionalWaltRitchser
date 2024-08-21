@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Students>
+  <Student>
+    <ID>1</ID>
+    <Name>John Doe</Name>
+    <Age>21</Age>
+    <EnrollmentDate>2023-09-01</EnrollmentDate>
+    <GPA>3.5</GPA>
+    <IsFullTime>true</IsFullTime>
+    <Courses>
+      <Course>Mathematics</Course>
+      <Course>Physics</Course>
+    </Courses>
+  </Student>
+  <Student>
+    <ID>2</ID>
+    <Name>Jane Smith</Name>
+    <Age>22</Age>
+    <EnrollmentDate>2022-01-15</EnrollmentDate>
+    <GPA>3.8</GPA>
+    <IsFullTime>false</IsFullTime>
+    <Courses>
+      <Course>Biology</Course>
+      <Course>Chemistry</Course>
+    </Courses>
+  </Student>
+  <Student>
+    <ID>3</ID>
+    <Name>Michael Johnson</Name>
+    <Age>20</Age>
+    <EnrollmentDate>2021-05-20</EnrollmentDate>
+    <GPA>3.2</GPA>
+    <IsFullTime>true</IsFullTime>
+    <Courses>
+      <Course>History</Course>
+      <Course>Literature</Course>
+    </Courses>
+  </Student>
+  <Student>
+    <ID>4</ID>
+    <Name>Emily Brown</Name>
+    <Age>23</Age>
+    <EnrollmentDate>2020-11-10</EnrollmentDate>
+    <GPA>3.9</GPA>
+    <IsFullTime>true</IsFullTime>
+    <Courses>
+      <Course>Computer Science</Course>
+      <Course>Statistics</Course>
+    </Courses>
+  </Student>
+  <Student>
+    <ID>5</ID>
+    <Name>Chris Wilson</Name>
+    <Age>19</Age>
+    <EnrollmentDate>2023-02-28</EnrollmentDate>
+    <GPA>3.4</GPA>
+    <IsFullTime>false</IsFullTime>
+    <Courses>
+      <Course>Economics</Course>
+      <Course>Philosophy</Course>
+    </Courses>
+  </Student>
+</Students>
