@@ -15,6 +15,5 @@ class Program
         Console.WriteLine($"{myDay} as number is: {myDay.ToString()}");
         myDay = examples.GetDayAsNumber("Monday");
         Console.WriteLine($"{myDay} as number is: {myDay.ToString()}");
-
     }
 }
