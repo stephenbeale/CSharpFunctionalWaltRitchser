@@ -45,5 +45,26 @@ namespace CSharpFunctionalWaltRitchser
         {
             return (candidate % multiplier) == 0;
         }
+
+        public int GetDayAsNumber(string day)
+        {
+            if (Enum.TryParse(day, true, out DaysOfWeek dayEnum))
+            {
+                return dayEnum switch
+                {
+                    DaysOfWeek.Monday => 1,
+                    DaysOfWeek.Tuesday => 2,
+                    DaysOfWeek.Wednesday => 3,
+                    DaysOfWeek.Thursday => 4,
+                    DaysOfWeek.Friday => 5,
+                    DaysOfWeek.Saturday => 6,
+                    DaysOfWeek.Sunday => 7,
+                };
+            }
+            return default;
+        }
+
+            public enum DaysOfWeek { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
     }
+    
 }

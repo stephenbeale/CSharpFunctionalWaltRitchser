@@ -9,13 +9,12 @@ class Program
     {
         var examples = new Examples();
         examples.DoWork();
+        var myDay = examples.GetDayAsNumber("My Day");
+        Console.WriteLine($"{myDay} as number is: {myDay.ToString()}");
+        myDay = examples.GetDayAsNumber("No");
+        Console.WriteLine($"{myDay} as number is: {myDay.ToString()}");
+        myDay = examples.GetDayAsNumber("Monday");
+        Console.WriteLine($"{myDay} as number is: {myDay.ToString()}");
 
-        var students = examples.GetStudentsForSteve();
-        students.ForEach(student =>
-        {
-            Console.WriteLine($"{student.Id},{student.Name},{student.Age},{student.EnrollmentDate},{student.GPA},{student.IsFullTime}");
-            Console.WriteLine("Courses: " + string.Join(", ", student.Courses));
-            Console.WriteLine();
-        } );
     }
 }
