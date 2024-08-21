@@ -14,11 +14,11 @@ namespace CSharpFunctionalWaltRitchser
         public string Name { get; set; }
         public int Age { get; set; }
         public DateOnly EnrollmentDate { get; set; }
-        public decimal GPA { get; set; }
+        public double GPA { get; set; }
         public bool IsFullTime { get; set; }
         public List<string> Courses { get; set; }
 
-        public Student(int id, string name, int age, DateOnly enrollmentDate, decimal gpa, bool isFullTime, List<string> courses)
+        public Student(int id, string name, int age, DateOnly enrollmentDate, double gpa, bool isFullTime, List<string> courses)
         {
             Id = id;
             Name = name;
@@ -27,6 +27,6 @@ namespace CSharpFunctionalWaltRitchser
             GPA = gpa;
             IsFullTime = isFullTime;
             Courses = courses;
-        }
+        }        
     }
 }

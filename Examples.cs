@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
+
 namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
@@ -19,35 +20,42 @@ namespace CSharpFunctionalWaltRitchser
         //example: OpenFile, UpdateFile
         //Use pure function to perform computations on the file contents.
         private const string RobotFileName = "RobotNames.xml";
-        private const string StudentFileName = "Students.xml"
+        private const string StudentFileName = "Students.xml";
        public void DoWork()
         {
             var rootNames = GetRobots();
+            Student student = new Student(id: 1, name: "me", age: 23, enrollmentDate: new DateOnly(day: 01, month:01, year:2020), gpa: 2.3, isFullTime: true, courses: new List<string> { "Maths", "Computer Science" });
+
         }
 
-        public ImmutableList<Robot> GetStudentsForSteves()
+        public ImmutableList<Student> GetStudentsForSteve()
         {
             try
             {
                 var xmlDetails = XDocument.Load(StudentFileName);
+                //Root elementS should point to all in list, not first entry of sub-list
                 var students = xmlDetails.Root.Elements("Student").
                     Select(x => new Student
                     {
-                        Id = (int)x.Element("Id"),
+                        //String name here must match XML exactly
+                        Id = (int)x.Element("ID"),
                         Name = x.Element("Name").Value,
                         Age = (int)x.Element("Age"),
-                        EnrollmentDate = (DateOnly)DateOnly.TryParse(x.Element("EnrollmentDate"),
-                        GPA = (decimal)x.Element("GPA"),
-                        IsFullTime = (bool)x.Element("IsFullTime"),
-                        Courses = x.Element("course").Value)
+                        EnrollmentDate = (DateOnly.Parse(x.Element("EnrollmentDate").Value),
+                        GPA = double.Parse(x.Element("GPA").Value),
+                        IsFullTime = bool.Parse(x.Element("IsFullTime").Value),
+                        Courses = x.Element("Courses").
+                        Elements("Course")
+                        .Select(c => c.Value)
+                        .ToList()
                     }).ToArray();
 
-                return students;
+                return ImmutableList.Create(students);
             }
             catch (Exception e)
             {
-
-                Console.WriteLine($"{e.Message}"); ;
+                Console.WriteLine($"{e.Message}");
+                return ImmutableList<Student>.Empty;
             }
         }
 
