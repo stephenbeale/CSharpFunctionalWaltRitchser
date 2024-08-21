@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
+using static CSharpFunctionalWaltRitchser.Examples;
 
 namespace CSharpFunctionalWaltRitchser
 {
@@ -25,7 +26,6 @@ namespace CSharpFunctionalWaltRitchser
         }
 
         #region If statements - poor practice
-
         public decimal GetProductPrice(Product product, int quantity, bool isPremiumCustomer)
         {
             decimal discountAmount = 0;
@@ -42,13 +42,69 @@ namespace CSharpFunctionalWaltRitchser
 
         #endregion
 
-        #region Expression version - my attempt
+        #region Expression version - answer
 
         //Uses a double ternary in lieu of if statements
         public decimal GetProductPriceExpression(Product product, int quantity, bool isPremiumCustomer)
         {
             decimal discountAmount = (quantity > 10 ? .15M : 0) + (isPremiumCustomer ? 0.05M : 0);
             return product.RetailPrice * (1 - discountAmount);
+        }
+
+        #endregion
+
+        #region Expression version - switch both old and new styles are fine
+
+        //Uses a switch case for each code uniquely
+        public string GetColorHex(StandardColours colors)
+        {
+            string hexString = string.Empty;
+            switch (colors)
+            {
+                case StandardColours.Red:
+                    hexString = "FF0000";
+                    break;
+                case StandardColours.Orange:
+                    hexString = "FFA500";
+                    break;
+                case StandardColours.Yellow:
+                    hexString = "FFFF00";
+                    break;
+                case StandardColours.Green:
+                    hexString = "008000";
+                    break;
+                case StandardColours.Blue:
+                    hexString = "0000FF";
+                    break;
+                case StandardColours.Black:
+                    hexString = "FFFFFF";
+                    break;
+                case StandardColours.White:
+                    hexString = "000000";
+                    break;
+                default:
+                    hexString = "000000";
+                    break;
+            }
+            return hexString;
+        }
+
+
+        //New way to do switch using lambda (which means, 'if this is the case, then this is the value')
+        public string GetColorHexByExpression(StandardColours colours)
+        {
+            string hexString = colours switch
+            {
+                StandardColours.Red => "FF0000",
+                StandardColours.Orange => "FFA500",
+                StandardColours.Yellow => "FFFF00",
+                StandardColours.Green => "008000",
+                StandardColours.Blue => "0000FF",
+                StandardColours.Black => "FFFFFF",
+                StandardColours.White => "000000",
+                _ => "000000",
+            };
+            return hexString;
         }
 
         #endregion
