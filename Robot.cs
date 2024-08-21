@@ -15,4 +15,6 @@ namespace CSharpFunctionalWaltRitchser
         public int Strength { get; set; }
         public int Endurance { get; set; }
     }
+
+    //Lack of constructor here is 'parameterless' constructor, so can use Weight = etc. when instantiating.
 }
