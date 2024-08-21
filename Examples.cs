@@ -64,6 +64,8 @@ namespace CSharpFunctionalWaltRitchser
         {
             try
             {
+                //Randomness
+                var random = new Random();
                 //Load function to load up contents (into memory??)
                 var xmlDoc = XDocument.Load(RobotFileName);
                 //Use Linq to retrieve details from the file contents
@@ -76,7 +78,9 @@ namespace CSharpFunctionalWaltRitchser
                     {
                         RobotName = x.Element("RobotName").Value,
                         TeamName = x.Element("TeamName").Value,
-                        Weight = (int)x.Element("Weight")
+                        Weight = (int)x.Element("Weight"),
+                        Speed = random.Next(1, 18),
+                        Endurance = random.Next(1, 18)
                     }).ToArray();
 
                 return ImmutableList.Create(robots);
