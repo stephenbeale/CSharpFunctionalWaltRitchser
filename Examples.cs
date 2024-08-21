@@ -68,6 +68,8 @@ namespace CSharpFunctionalWaltRitchser
                 //Use Linq to retrieve details from the file contents
                 //Select ALL root elements, instantiate new Robot from each of those elements, then to an array to retrun as list
                 //ToArray because it needs to be returned as immutable - array is immutable list compatible
+
+                //Robot does not have a constructor, hence this can be done this way.
                 var robots = xmlDoc.Root.Elements("Robot")
                     .Select(x => new Robot
                     {
