@@ -25,6 +25,8 @@ namespace CSharpFunctionalWaltRitchser
         {
             var robots = GetRobots();           
             int total = GetTotalWeight(robots);
+            var blueRobots = ImmutableList.Create(robots.Where(x => x.TeamName == "Blue").ToArray());
+            int blueTeamTotal = GetTotalWeight(blueRobots);
         }
 
         public ImmutableList<Student> GetStudentsForSteve()
@@ -85,6 +87,7 @@ namespace CSharpFunctionalWaltRitchser
             }
         }
 
+        //Immutable list is better than generic as you could then change the type and get a different result.
         public int GetTotalWeight(ImmutableList<Robot> robots)
         {
             int total = 0;
