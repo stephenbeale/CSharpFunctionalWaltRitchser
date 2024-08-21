@@ -19,9 +19,29 @@ namespace CSharpFunctionalWaltRitchser
         {
             var currentProduct = new Product(productName: "Microphone", retailPrice: 200M);
             var salePriceA = GetProductPrice(product: currentProduct, quantity: 12, isPremiumCustomer: true);
-        }
-        
 
+            //var salePriceB = GetProductPriceByExpression(product: currentProduct, quantity: 12, isPremiumCustomer: true);
+        }
+
+        #region If statements - poor practice
+
+        public decimal GetProductPrice(Product product, int quantity, bool isPremiumCustomer)
+        {
+            decimal discountAmount = 0;
+            if(quantity > 10)
+            {
+                discountAmount += .15M;
+            }
+            if(isPremiumCustomer)
+            {
+                discountAmount += .05M;
+            }
+            return product.RetailPrice * (1 - discountAmount);
+        }
+
+        #endregion
+
+        #region Expression examples
         /*Expressions can be:
 * - literal value
 * - method invocation
@@ -62,25 +82,35 @@ namespace CSharpFunctionalWaltRitchser
 
             bool isBig = x > 1000;
             string isBigString = isBig ? "Big Number" : "Small number";
-
-
         }
 
-        private class Product
+        #endregion
+
+        #region Types
+        public enum StandardColours
         {
-            string productName;
-            decimal retailPrice;
+            Red,
+            Orange,
+            Yellow,
+            Green,
+            Blue,
+            Indigo,
+            Violet,
+            Black,
+            White
+        }
+
+        public class Product
+        {
+            public string ProductName { get; set; }
+            public decimal RetailPrice { get; set; }
 
             public Product(string productName, decimal retailPrice)
             {
-                this.productName = productName;
-                this.retailPrice = retailPrice;
+                ProductName = productName;
+                RetailPrice = retailPrice;
             }            
         }
-
-        public decimal GetProductPrice(Product product, int quantity, bool isPremiumCustomer)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
