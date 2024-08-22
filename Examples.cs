@@ -18,7 +18,7 @@ namespace CSharpFunctionalWaltRitchser
         public void DoWorkWithPipeline()
         {
             int value = 5;
-
+            
             int resultA = value.ToFourthPower().MakeNegative();
             int resultB = value.ToFourthPower().MakeNegative().AddTo(10);
         }
