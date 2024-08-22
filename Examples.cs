@@ -1,16 +1,15 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
 
-using static CSharpFunctionalWaltRitchser.Examples;
 
 namespace CSharpFunctionalWaltRitchser
 {
@@ -19,52 +18,55 @@ namespace CSharpFunctionalWaltRitchser
 
         public void DoWork()
         {
-            UseLambda();
+            UseHigherOrderFunction();
         }
 
-        private void UseLambda()
+        public void UseHigherOrderFunction()
         {
-            /* easy way to represent functions is with
-             * the Func<T> and Action<T> delegates
-             */
+            // A higher order functions is:
+            // - a function that takes a function as an argument
+            // - or returns a function
 
-            //Use variable to store a function (as delegate type)
-            //If your function is short, and doesn't need to be reused
-            // a Lambda expression is useful
-            Func<int, int> functionVar = x => (x * 10);
+            //Functional alternative to for loop.
+            var numbers = Enumerable.Range(1, 120);
 
-            int result = functionVar(6);
+            var divisibleByFive = numbers.FilterWithWhereExpression(x => x % 5 == 0);
+            var divisibleBySeven = numbers.FilterWithWhereExpression(x => x % 7 == 0);
 
-            Func<int, int, bool> predicateVar = IsMultipleOf;
+            var PowersOfThree = numbers.TransformWithOperation(x => x * x * x);
 
-            bool isMultipleOfFive = predicateVar(25, 5);
-            bool isMultipleOfSeven = predicateVar(25, 7);
+            var Added = numbers.TransformWithOperation(Extensions.AddTo(3));
+            var maxNumbers = numbers.TransformWithOperation(Extensions.GetMax(20));
         }
-
-        public bool IsMultipleOf(int candidate, int multiplier)
-        {
-            return (candidate % multiplier) == 0;
-        }
-
-        public int GetDayAsNumber(string day)
-        {
-            if (Enum.TryParse(day, true, out DaysOfWeek dayEnum))
-            {
-                return dayEnum switch
-                {
-                    DaysOfWeek.Monday => 1,
-                    DaysOfWeek.Tuesday => 2,
-                    DaysOfWeek.Wednesday => 3,
-                    DaysOfWeek.Thursday => 4,
-                    DaysOfWeek.Friday => 5,
-                    DaysOfWeek.Saturday => 6,
-                    DaysOfWeek.Sunday => 7,
-                };
-            }
-            return default;
-        }
-
-            public enum DaysOfWeek { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
     }
-    
+
+    public static class Extensions
+    {
+        public static IEnumerable<T> FilterWithWhereExpression(this IEnumerable<T> items, Func<T, bool> predicate)
+        {
+            foreach (T item in items)
+            {
+                if (predicate(item))
+                {
+                    yield return item;
+                }
+                {
+
+                }
+            }
+        }
+
+        public static IEnumerable<T1> TransformWithOperation<T1>(this IEnumerable<T1> items, Func<T1, T1> transformer)
+        {
+            //execute this for every item in the enumerable
+            foreach (T1 item in items)
+            {
+                yield return transformer(item);
+            }
+        }
+
+        //Function factory, return a function
+        public static Func<int, int> AddTo(int n) => i => i + n;
+        public static Func<int, int> GetMax(int n) => i => Math.Max(i, n);
+    }
 }
