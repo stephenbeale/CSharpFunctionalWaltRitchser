@@ -19,6 +19,7 @@ namespace CSharpFunctionalWaltRitchser
         {
             int value = 5;
             
+            //Static class and methods mean no object is needed here.
             int resultA = value.ToFourthPower().MakeNegative();
             int resultB = value.ToFourthPower().MakeNegative().AddTo(10);
         }
