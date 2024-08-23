@@ -28,6 +28,13 @@ namespace CSharpFunctionalWaltRitchser
             //use query expression (equivalent to extension method option above)
             var queryB = from n in numbers select n;
 
+            //functional way to turn it into a list
+            var resultsB = queryB.ToList();
+
+            //alternative from perplexity
+            //functional way to turn it into a list
+            //var resultsB = numbers.Select(n => n).ToList();
+
             ////run the query
             //List<int> resultsA = new List<int>();
             //foreach (int number in queryA)
@@ -36,8 +43,7 @@ namespace CSharpFunctionalWaltRitchser
             //    resultsA.Add(number);
             //}
 
-            //functional way to turn it into a list
-            var resultsB = queryB.ToList();
+
         }
     }
        
