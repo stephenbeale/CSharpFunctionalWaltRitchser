@@ -56,8 +56,8 @@ namespace CSharpFunctionalWaltRitchser
 
     public class RayPoint
     {
-        public int X;
-        public int Y;
+        public int X { get; }
+        public int Y { get; }
 
         public RayPoint(int x, int y)
         {

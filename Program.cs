@@ -9,5 +9,7 @@ class Program
     {
         var examples = new Examples();
         examples.SelectWithNoTransform();
+        examples.SelectWithNumberTransform();
+        examples.SelectProjectToAnotherType();
     }
 }
