@@ -15,13 +15,12 @@ namespace CSharpFunctionalWaltRitchser
 {
     public class Examples
     {
-        public void DoWorkWithPipeline()
+        public void DoWorkWithStandardLambda()
         {
-            int value = 5;
-            
-            //Static class and methods mean no object is needed here.
-            int resultA = value.ToFourthPower().MakeNegative();
-            int resultB = value.ToFourthPower().MakeNegative().AddTo(10);
+            //Random Linq example from Perplexity, not the course. Code too hard for me to follow on course.
+            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            //Select 
+            var squaredNumbers = numbers.Select(num => num * num);  // { 1, 4, 9, 16, 25 }
         }
     }
 
