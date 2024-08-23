@@ -15,59 +15,30 @@ namespace CSharpFunctionalWaltRitchser
 {
     internal class Examples
     {
-        public void UseEnumerablePipeline()
+        public void SelectWithNoTransform()
         {
-            //similar to LINQ versions
-            var numbers = Enumerable.Range(1, 120);
-            numbers.ToList().ForEach(item => Console.WriteLine(item));
-            var selectedNumbers = Enumerable.Select(source: numbers, selector: x => x + x);
+            //functional Map == LINQ Select
+            //transform each item in the list
 
-            //evaluated from right to left
-            var resultA = numbers.WhereAsPipeline(x => x % 5 == 0);
-            var resultB = numbers.WhereAsPipeline(x => x % 12 == 0).TransformAsPipeline(x => x * 10).ToList();
+            var numbers = Enumerable.Range(1, 50);
 
-            var resultC = resultB.SkipByAsPipeline(6).ToList();
+            //use extension methods
+            var queryA = numbers.Select(x => x); //performs no actions
+
+            //use query expression (equivalent to extension method option above)
+            var queryB = from n in numbers select n;
+
+            ////run the query
+            //List<int> resultsA = new List<int>();
+            //foreach (int number in queryA)
+            //{
+            //    //a  non-functional way to populate list.
+            //    resultsA.Add(number);
+            //}
+
+            //functional way to turn it into a list
+            var resultsB = queryB.ToList();
         }
     }
-
-    public static class Extensions
-    {
-       public static IEnumerable<T> WhereAsPipeline<T>(this IEnumerable<T> source, Predicate<T> predicate)
-        {
-            foreach (T item in source)
-            {
-                if(predicate(item))
-                {
-                    yield return item;
-                }
-            }
-        }
-
-        public static IEnumerable<T> TransformAsPipeline<T>(this IEnumerable<T> source, Func<T, T> transformer)
-        {
-            //execute this code for every item in the enumerable
-
-            foreach (T item in source)
-            {
-                yield return item;
-            }
-        }
-
-        public static IEnumerable<T> SkipByAsPipeline<T>(this IEnumerable<T> source, int numberToSkip)
-        {
-            using (IEnumerator<T> e = source.GetEnumerator())
-            {
-                while (numberToSkip > 0 && e.MoveNext()) numberToSkip--;
-                if (numberToSkip <= 0)
-                {
-                    while (e.MoveNext()) yield return e.Current;
-                }
-            }
-        }
-
-        public static T PerformOperation<T>(this T value, Func<T, T> performer) where T : struct
-        {
-            return performer(value);
-        }
-    }
+       
 }
