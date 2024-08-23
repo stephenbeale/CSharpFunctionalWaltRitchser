@@ -30,19 +30,18 @@ namespace CSharpFunctionalWaltRitchser
 
             //functional way to turn it into a list
             var resultsB = queryB.ToList();
+        }
 
-            //alternative from perplexity
-            //functional way to turn it into a list
-            //var resultsB = numbers.Select(n => n).ToList();
+        public void SelectWithNumberTransform() {
+            //functional Map == LINQ Select
+            //perform an action
+            var numbers = Enumerable.Range(1, 50);
+            var queryA = numbers.Select(x => x * 10);
+            var queryB = from n in numbers
+                         select n * 10;
 
-            ////run the query
-            //List<int> resultsA = new List<int>();
-            //foreach (int number in queryA)
-            //{
-            //    //a  non-functional way to populate list.
-            //    resultsA.Add(number);
-            //}
-
+            var resultsA = queryA.ToList();
+            var resultsB = queryB.ToList();
 
         }
     }
