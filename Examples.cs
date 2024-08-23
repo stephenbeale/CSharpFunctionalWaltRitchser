@@ -17,7 +17,10 @@ namespace CSharpFunctionalWaltRitchser
     {
         public void DoWorkWithStandardLambda()
         {
-            
+            //Random Linq example from Perplexity, not the course. Code too hard for me to follow on course.
+            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            //Select 
+            var squaredNumbers = numbers.Select(num => num * num);  // { 1, 4, 9, 16, 25 }
         }
     }
 
