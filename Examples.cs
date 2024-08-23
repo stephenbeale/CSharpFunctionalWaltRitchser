@@ -13,32 +13,60 @@ using System.Text;
 
 namespace CSharpFunctionalWaltRitchser
 {
-    public class Examples
+    internal class Examples
     {
-        public void DoWorkWithStandardLambda()
+        public void UseEnumerablePipeline()
         {
-            //Random Linq example from Perplexity, not the course. Code too hard for me to follow on course.
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
-            //Select 
-            var squaredNumbers = numbers.Select(num => num * num);  // { 1, 4, 9, 16, 25 }
+            //similar to LINQ versions
+            var numbers = Enumerable.Range(1, 120);
+            Console.WriteLine($"List contains {Enumerable.Count(numbers)} elements.");
+
+            //evaluated from right to left
+            var resultA = numbers.WhereAsPipeline(x => x % 5 == 0);
+            var resultB = numbers.WhereAsPipeline(x => x % 12 == 0).TransformAsPipeline(x => x * 10).ToList();
+
+            var resultC = resultB.SkipByAsPipeline(6).ToList();
         }
     }
 
     public static class Extensions
     {
-        public static int ToFourthPower(this int candidate)
+       public static IEnumerable<T> WhereAsPipeline<T>(this IEnumerable<T> source, Predicate<T> predicate)
         {
-            return candidate * candidate * candidate * candidate;
+            foreach (T item in source)
+            {
+                if(predicate(item))
+                {
+                    yield return item;
+                }
+            }
         }
 
-        public static int MakeNegative(this int candidate)
+        public static IEnumerable<T> TransformAsPipeline<T>(this IEnumerable<T> source, Func<T, T> transformer)
         {
-            return candidate * -1;
+            //execute this code for every item in the enumerable
+
+            foreach (T item in source)
+            {
+                yield return item;
+            }
         }
 
-        public static int AddTo(this int candidate, int adder)
+        public static IEnumerable<T> SkipByAsPipeline<T>(this IEnumerable<T> source, int numberToSkip)
         {
-            return candidate + adder;
+            using (IEnumerator<T> e = source.GetEnumerator())
+            {
+                while (numberToSkip > 0 && e.MoveNext()) numberToSkip--;
+                if (numberToSkip <= 0)
+                {
+                    while (e.MoveNext()) yield return e.Current;
+                }
+            }
+        }
+
+        public static T PerformOperation<T>(this T value, Func<T, T> performer) where T : struct
+        {
+            return performer(value);
         }
     }
 }
