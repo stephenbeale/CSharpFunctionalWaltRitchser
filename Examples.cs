@@ -42,8 +42,27 @@ namespace CSharpFunctionalWaltRitchser
 
             var resultsA = queryA.ToList();
             var resultsB = queryB.ToList();
+        }
 
+        public void SelectProjectToAnotherType() {
+            //functional Map == LINQ Select
+            //perform an action
+            var xValues = Enumerable.Range(1, 20);
+            var yValues = Enumerable.Range(100, 20);
+
+            var queryA = xValues.Select(x => new RayPoint(x, 0));
         }
     }
-       
+
+    public class RayPoint
+    {
+        public int X;
+        public int Y;
+
+        public RayPoint(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+    }
 }
