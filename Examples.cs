@@ -19,7 +19,8 @@ namespace CSharpFunctionalWaltRitchser
         {
             //similar to LINQ versions
             var numbers = Enumerable.Range(1, 120);
-            Console.WriteLine($"List contains {Enumerable.Count(numbers)} elements.");
+            numbers.ToList().ForEach(item => Console.WriteLine(item));
+            var selectedNumbers = Enumerable.Select(source: numbers, selector: x => x + x);
 
             //evaluated from right to left
             var resultA = numbers.WhereAsPipeline(x => x % 5 == 0);
