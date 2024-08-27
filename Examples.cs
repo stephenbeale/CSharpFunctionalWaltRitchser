@@ -128,6 +128,25 @@ namespace CSharpFunctionalWaltRitchser
             var resultsA = basicSelect.ToList();
             var resultsB = basicJoin.ToList();
         }
+
+        public void AggregateExample()
+        {
+            ImmutableList<int> setA = ImmutableList.Create(5, 4, 1, 3, 4, 9, 8, 7, 6, 2, 12, 24);
+            ImmutableList<int> setB = 
+                ImmutableList.Create(Enumerable.Range(1, 40).Where(x => x % 5 == 0).ToArray());
+
+            //predefined aggreates
+            var total = setA.Sum();
+            var count = setB.Count();
+
+            var highestNumber = setB.Max();
+
+            //custom aggregate
+            var multipleOf = setA.Aggregate((first, second) => first * second);
+
+            //set the initial seed (accumulator value)
+            var anotherMultiple = setA.Aggregate(100, (first, second) => first * second);
+        }
     }
 
     public class RayPoint
