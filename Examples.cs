@@ -122,7 +122,8 @@ namespace CSharpFunctionalWaltRitchser
             var basicSelect = setA.Select(a => setB.Select(b => $"A {a}, B:{b}"));
 
             //Right way
-            var basicJoin = setA.SelectMany(a => setB.Select(b => $"A {a}, B:{b}"));
+            //Take each element from setA, a, and combine with each element in setB, b, then make a new string entry for each with the interpolated string
+            var basicJoin = setA.SelectMany(a => setB.Select(b => $"A:{a}, B:{b}"));
 
             var resultsA = basicSelect.ToList();
             var resultsB = basicJoin.ToList();
