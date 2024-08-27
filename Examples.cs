@@ -147,6 +147,18 @@ namespace CSharpFunctionalWaltRitchser
             //set the initial seed (accumulator value)
             var anotherMultiple = setA.Aggregate(100, (first, second) => first * second);
         }
+
+        //Generic aggregate function example
+        public void AggregateRobots()
+        {
+            var robot1 = new Robot(name: "Robot1", batteryLevel: 60);
+            var robot2 = new Robot(name: "Robot2", batteryLevel: 80);
+            var robot3 = new Robot(name: "Robot3", batteryLevel: 20);
+
+            ImmutableList<Robot> robots = ImmutableList.Create(new Robot[] { robot1, robot2, robot3 });
+
+            var lowBattery = robots.Min(x => x.BatteryLevel);
+        }
     }
 
     public class RayPoint
