@@ -118,8 +118,10 @@ namespace CSharpFunctionalWaltRitchser
             var setA = Enumerable.Range(2, 3);
             var setB = Enumerable.Range(5, 3);
 
+            //Horrible and confusing
             var basicSelect = setA.Select(a => setB.Select(b => $"A {a}, B:{b}"));
 
+            //Right way
             var basicJoin = setA.SelectMany(a => setB.Select(b => $"A {a}, B:{b}"));
 
             var resultsA = basicSelect.ToList();
