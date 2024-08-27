@@ -110,6 +110,24 @@ namespace CSharpFunctionalWaltRitchser
             public string Name { get; set; }
             public List<string> Colours { get; set; }
         }
+
+        public void JoinExample()
+        {
+            //SelectMany also useful for joining similar lists
+
+            var setA = Enumerable.Range(2, 3);
+            var setB = Enumerable.Range(5, 3);
+
+            //Horrible and confusing
+            var basicSelect = setA.Select(a => setB.Select(b => $"A {a}, B:{b}"));
+
+            //Right way
+            //Take each element from setA, a, and combine with each element in setB, b, then make a new string entry for each with the interpolated string
+            var basicJoin = setA.SelectMany(a => setB.Select(b => $"A:{a}, B:{b}"));
+
+            var resultsA = basicSelect.ToList();
+            var resultsB = basicJoin.ToList();
+        }
     }
 
     public class RayPoint
