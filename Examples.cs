@@ -86,6 +86,30 @@ namespace CSharpFunctionalWaltRitchser
 
             var resultsA = primes.ToList();
         }
+
+        public void FlattenListProperty() {
+            //flattens multi-dimensional set into a single set
+            // AKA SelectMany select values from a nested collection
+            var brandA = new Brand { Name = "Fancy-shoes", Colours = new List<string> { "Red", "Orange" } };
+            var brandB = new Brand { Name = "Lux-cars", Colours = new List<string> { "Gold", "Silver" } };
+            var brandC = new Brand { Name = "Wow-electronics", Colours = new List<string> { "Black", "Blue", "Purple" } };
+            List<Brand> brands = new List<Brand>();
+            brands.Add(brandA); 
+            brands.Add(brandB);
+            brands.Add(brandC);
+
+            //this does not produces the results we want - instead it returns a separate list of colours for each item, still nested
+            var resultA = brands.Select(x => x.Colours).ToList();
+
+            //This DOES! Combines all colours found into a single, top-level list i.e. no nesting
+            var resultB = brands.SelectMany(x => x.Colours).ToList();
+        }
+
+        private class Brand
+        {
+            public string Name { get; set; }
+            public List<string> Colours { get; set; }
+        }
     }
 
     public class RayPoint

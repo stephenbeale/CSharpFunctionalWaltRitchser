@@ -8,7 +8,6 @@ class Program
     static void Main(string[] args)
     {
         var examples = new Examples();
-        examples.FilterSimple();
-        examples.FilterForPrimeNumbers();
+        examples.FlattenListProperty();        
     }
 }
