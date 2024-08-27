@@ -8,8 +8,7 @@ class Program
     static void Main(string[] args)
     {
         var examples = new Examples();
-        examples.SelectWithNoTransform();
-        examples.SelectWithNumberTransform();
-        examples.SelectProjectToAnotherType();
+        examples.FilterSimple();
+        examples.FilterForPrimeNumbers();
     }
 }

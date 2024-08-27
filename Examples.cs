@@ -62,7 +62,29 @@ namespace CSharpFunctionalWaltRitchser
 
         public void FilterSimple()
         {
+            var numbers = Enumerable.Range(1, 200);
+            var queryA = numbers.Where(x => x < 20);
+            //Select is optional here - don't bother!
+            var queryAa = numbers.Where(x => x < 20).Select(x => x);
 
+            //Query expression
+            var queryB = from n in numbers
+                         where n < 20 || n > 180
+                         select n;
+
+            var resultsA = queryA.ToList();
+            var resultsAa = queryAa.ToList();
+            var resultsB = queryB.ToList();
+        }
+
+        public void FilterForPrimeNumbers() { 
+            Func<int, bool> isPrime = p => Enumerable.Range(2, (int)Math.Sqrt(p) -1)
+                                            .All(divisor => p % divisor != 0);
+
+            var primes = Enumerable.Range(2, 1000 * 1000)
+                .Where(isPrime);
+
+            var resultsA = primes.ToList();
         }
     }
 
