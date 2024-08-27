@@ -103,12 +103,27 @@ namespace CSharpFunctionalWaltRitchser
 
             //This DOES! Combines all colours found into a single, top-level list i.e. no nesting
             var resultB = brands.SelectMany(x => x.Colours).ToList();
-        }
+        }       
 
         private class Brand
         {
             public string Name { get; set; }
             public List<string> Colours { get; set; }
+        }
+
+        public void JoinExample()
+        {
+            //SelectMany also useful for joining similar lists
+
+            var setA = Enumerable.Range(2, 3);
+            var setB = Enumerable.Range(5, 3);
+
+            var basicSelect = setA.Select(a => setB.Select(b => $"A {a}, B:{b}"));
+
+            var basicJoin = setA.SelectMany(a => setB.Select(b => $"A {a}, B:{b}"));
+
+            var resultsA = basicSelect.ToList();
+            var resultsB = basicJoin.ToList();
         }
     }
 
