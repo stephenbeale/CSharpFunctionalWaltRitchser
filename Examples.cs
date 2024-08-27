@@ -110,6 +110,43 @@ namespace CSharpFunctionalWaltRitchser
             public string Name { get; set; }
             public List<string> Colours { get; set; }
         }
+
+        public void JoinExample()
+        {
+            //SelectMany also useful for joining similar lists
+
+            var setA = Enumerable.Range(2, 3);
+            var setB = Enumerable.Range(5, 3);
+
+            //Horrible and confusing
+            var basicSelect = setA.Select(a => setB.Select(b => $"A {a}, B:{b}"));
+
+            //Right way
+            //Take each element from setA, a, and combine with each element in setB, b, then make a new string entry for each with the interpolated string
+            var basicJoin = setA.SelectMany(a => setB.Select(b => $"A:{a}, B:{b}"));
+
+            var resultsA = basicSelect.ToList();
+            var resultsB = basicJoin.ToList();
+        }
+
+        public void AggregateExample()
+        {
+            ImmutableList<int> setA = ImmutableList.Create(5, 4, 1, 3, 4, 9, 8, 7, 6, 2, 12, 24);
+            ImmutableList<int> setB = 
+                ImmutableList.Create(Enumerable.Range(1, 40).Where(x => x % 5 == 0).ToArray());
+
+            //predefined aggreates
+            var total = setA.Sum();
+            var count = setB.Count();
+
+            var highestNumber = setB.Max();
+
+            //custom aggregate
+            var multipleOf = setA.Aggregate((first, second) => first * second);
+
+            //set the initial seed (accumulator value)
+            var anotherMultiple = setA.Aggregate(100, (first, second) => first * second);
+        }
     }
 
     public class RayPoint
