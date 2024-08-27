@@ -8,6 +8,8 @@ class Program
     static void Main(string[] args)
     {
         var examples = new Examples();
-        examples.UseEnumerablePipeline();
+        examples.SelectWithNoTransform();
+        examples.SelectWithNumberTransform();
+        examples.SelectProjectToAnotherType();
     }
 }

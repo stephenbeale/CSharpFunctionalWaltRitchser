@@ -15,59 +15,66 @@ namespace CSharpFunctionalWaltRitchser
 {
     internal class Examples
     {
-        public void UseEnumerablePipeline()
+        public void SelectWithNoTransform()
         {
-            //similar to LINQ versions
-            var numbers = Enumerable.Range(1, 120);
-            numbers.ToList().ForEach(item => Console.WriteLine(item));
-            var selectedNumbers = Enumerable.Select(source: numbers, selector: x => x + x);
+            //functional Map == LINQ Select
+            //transform each item in the list
 
-            //evaluated from right to left
-            var resultA = numbers.WhereAsPipeline(x => x % 5 == 0);
-            var resultB = numbers.WhereAsPipeline(x => x % 12 == 0).TransformAsPipeline(x => x * 10).ToList();
+            var numbers = Enumerable.Range(1, 50);
 
-            var resultC = resultB.SkipByAsPipeline(6).ToList();
+            //use extension methods
+            var queryA = numbers.Select(x => x); //performs no actions
+
+            //use query expression (equivalent to extension method option above)
+            var queryB = from n in numbers select n;
+
+            //functional way to turn it into a list
+            var resultsB = queryB.ToList();
+        }
+
+        public void SelectWithNumberTransform() {
+            //functional Map == LINQ Select
+            //perform an action
+            var numbers = Enumerable.Range(1, 50);
+            var queryA = numbers.Select(x => x * 10);
+            var queryB = from n in numbers
+                         select n * 10;
+
+            var resultsA = queryA.ToList();
+            var resultsB = queryB.ToList();
+        }
+
+        public void SelectProjectToAnotherType() {
+            //functional Map == LINQ Select
+            //perform an action
+            var xValues = Enumerable.Range(1, 20);
+            var yValues = Enumerable.Range(100, 20);
+
+            //For value of x, instantiate new Ray Point, set x, leave y as 0.
+            var queryA = xValues.Select(x => new RayPoint(x, 0));
+
+            var queryB = from n in yValues
+                         select new RayPoint(0, n);
+
+            var resultsA = queryA.ToList();
+            var resultsB = queryB.ToList();
+        }
+
+        public void FilterSimple()
+        {
+
         }
     }
 
-    public static class Extensions
+    public class RayPoint
     {
-       public static IEnumerable<T> WhereAsPipeline<T>(this IEnumerable<T> source, Predicate<T> predicate)
-        {
-            foreach (T item in source)
-            {
-                if(predicate(item))
-                {
-                    yield return item;
-                }
-            }
-        }
+        public int X { get; }
+        public int Y { get; }
 
-        public static IEnumerable<T> TransformAsPipeline<T>(this IEnumerable<T> source, Func<T, T> transformer)
+        public RayPoint(int x, int y)
         {
-            //execute this code for every item in the enumerable
-
-            foreach (T item in source)
-            {
-                yield return item;
-            }
-        }
-
-        public static IEnumerable<T> SkipByAsPipeline<T>(this IEnumerable<T> source, int numberToSkip)
-        {
-            using (IEnumerator<T> e = source.GetEnumerator())
-            {
-                while (numberToSkip > 0 && e.MoveNext()) numberToSkip--;
-                if (numberToSkip <= 0)
-                {
-                    while (e.MoveNext()) yield return e.Current;
-                }
-            }
-        }
-
-        public static T PerformOperation<T>(this T value, Func<T, T> performer) where T : struct
-        {
-            return performer(value);
+            X = x;
+            Y = y;
         }
     }
 }
