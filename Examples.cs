@@ -94,7 +94,7 @@ namespace CSharpFunctionalWaltRitchser
             var brandB = new Brand { Name = "Lux-cars", Colours = new List<string> { "Gold", "Silver" } };
             var brandC = new Brand { Name = "Wow-electronics", Colours = new List<string> { "Black", "Blue", "Purple" } };
             List<Brand> brands = new List<Brand>();
-            brands.Add(brandA); 
+            brands.Add(brandA);
             brands.Add(brandB);
             brands.Add(brandC);
 
