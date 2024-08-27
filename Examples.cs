@@ -50,7 +50,19 @@ namespace CSharpFunctionalWaltRitchser
             var xValues = Enumerable.Range(1, 20);
             var yValues = Enumerable.Range(100, 20);
 
+            //For value of x, instantiate new Ray Point, set x, leave y as 0.
             var queryA = xValues.Select(x => new RayPoint(x, 0));
+
+            var queryB = from n in yValues
+                         select new RayPoint(0, n);
+
+            var resultsA = queryA.ToList();
+            var resultsB = queryB.ToList();
+        }
+
+        public void FilterSimple()
+        {
+
         }
     }
 
